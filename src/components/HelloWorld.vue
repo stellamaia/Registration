@@ -3,27 +3,27 @@
     <b-container class="container">
       <b-card class="cards" title="Olá Visitante!">
         <div class="lab-ip">
-          <label class="labeltext" for="firstName"> E-mail</label>
+        <label class="labeltext" for="firstName"> E-mail</label>
 
-          <b-form-input
-            class="input-text"
-            id="email"
-            type="email"
-            placeholder="Digite seu E-mail"
-          ></b-form-input>
-        </div>
-        <div class="lab-ip-2">
-          <label v-for="type in types" :key="type" class="labeltext" for="senha"
-            >Senha</label
-          >
-          <b-form-input
-            class="input-text senha"
-            :type="type"
-            placeholder="Digite a sua senha"
-          ></b-form-input>
+        <b-form-input
+          class="input-text"
+          id="email"
+          type="email"
+          placeholder="Digite seu E-mail"
+        ></b-form-input>
+</div>
+<div class="lab-ip-2">
+        <label v-for="type in types" :key="type" class="labeltext" for="senha"
+          >Senha</label
+        >
+        <b-form-input
+          class="input-text senha"
+          :type="type"
+          placeholder="Digite a sua senha"
+        ></b-form-input>
         </div>
 
-        <div class="botao">
+          <div class="botao">
           <button class="entrar">Entrar</button>
 
           <div class="link">
@@ -119,84 +119,87 @@ export default {
   .cards {
     height: 70vh;
   }
-  .link {
-    text-align: center;
-    padding-top: 10px;
-  }
+  .link{
+  text-align: center;
+padding-top: 10px;
+}
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
-  .container {
+ .container {
     padding-top: 100px;
   }
   .cards {
     height: 60vh;
   }
-  .link {
-    text-align: center;
-    padding-top: 10px;
-  }
+  .link{
+  text-align: center;
+padding-top: 10px;
+}
 }
 @media screen and (min-width: 769px) and (max-width: 1024px) {
-  .container {
+.container {
     padding-top: 180px;
   }
   .cards {
     height: 70vh;
-    padding-top: 60px;
+    padding-top:60px ;
   }
-  .link {
-    text-align: center;
-    padding-top: 10px;
-  }
-  .lab-ip {
-    padding: 30px 100px 10px 100px;
-  }
-  .lab-ip-2 {
-    padding: 0px 100px 30px 100px;
-  }
+  .link{
+  text-align: center;
+padding-top: 10px;
+}
+.lab-ip{
+  padding: 30px 100px 10px 100px;
+}
+.lab-ip-2{
+  padding: 0px 100px 30px 100px;
+}
 }
 @media screen and (min-width: 1025px) and (max-width: 1200px) {
-  .container {
+.container {
     padding-top: 150px;
   }
   .cards {
-    height: 70vh;
-    padding-top: 80px;
+ height: 70vh;
+    padding-top:80px ;
   }
-  .link {
-    text-align: center;
-    padding-top: 20px;
-  }
-  .lab-ip {
-    padding: 30px 200px 0px 200px;
-  }
-  .lab-ip-2 {
-    padding: 20px 200px 10px 200px;
-  }
+  .link{
+  text-align: center;
+padding-top: 20px;
+}
+.lab-ip{
+  padding: 30px 200px 0px 200px;
+}
+.lab-ip-2{
+   padding: 20px 200px 10px 200px;
+}
 }
 @media screen and (min-width: 1201px) {
-  .container {
-    padding: 220px 200px 0 200px;
+.container {
+      padding: 220px 200px 0 200px;
+
   }
   .cards {
+    
     height: 50vh;
-    padding-top: 20px;
+    padding-top:20px ;
   }
-  .botao {
+  .botao{
     padding-top: 40px;
   }
 
-  .lab-ip {
+.lab-ip{
+  padding: 30px 150px 0px 150px;
+}
+.lab-ip-2{
     padding: 30px 150px 0px 150px;
-  }
-  .lab-ip-2 {
-    padding: 30px 150px 0px 150px;
-  }
+}
 }
 @media screen and (min-width: 1400px) {
-  .container {
+ .container {
     padding: 220px 300px 0 300px;
+
   }
 }
 </style>

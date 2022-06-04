@@ -24,7 +24,10 @@
         </div>
 
           <div class="botao">
+            <router-link to="/entrar">
           <button class="entrar">Entrar</button>
+            </router-link>
+
 
           <div class="link">
             <router-link to="/about">

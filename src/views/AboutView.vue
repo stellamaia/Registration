@@ -145,7 +145,9 @@
           <b-row>
             <b-col  class="coluna" cols="12" sm="12" md="12" lg="12" xl="12">
               <div class="botao">
-                <button class="input-text entrar">Entrar</button>
+                  <router-link to="/">
+                <button class="input-text entrar">Cadastrar</button>
+                  </router-link>
               </div>
             </b-col>
           </b-row>

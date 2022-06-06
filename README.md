@@ -1,5 +1,7 @@
 # registration
 
+Responsivo
+
 ![Captura de Tela 2022-06-06 às 10 13 23](https://user-images.githubusercontent.com/78916702/172167724-e0f66e04-b999-4a41-a739-949b500e31e7.png)
 ![Captura de Tela 2022-06-06 às 10 13 45](https://user-images.githubusercontent.com/78916702/172167734-8ca508ea-37e9-43a2-a0e8-32416fc74435.png)
 

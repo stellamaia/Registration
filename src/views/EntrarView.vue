@@ -1,3 +1,5 @@
+
+   
 <template>
   <div class="EntrarView">
     <div class="cad">
@@ -19,11 +21,13 @@
                 <button class="entrar">Editar Dados</button>
               </b-col>
               <b-col class="botao" cols="12" sm="12" md="6" lg="4" xl="3">
+                
                 <button class="entrar">Sair</button>
               </b-col>
             </b-row>
           </div>
         </b-col>
+
       </b-row>
     </b-container>
   </div>
@@ -33,9 +37,9 @@
 
 <script>
 import axios from 'axios'
-
 const baseURL = "http://localhost:3000/dados";
-export default{
+
+export default {
   name:"EntrarView",
   data(){
     return{
@@ -48,7 +52,6 @@ export default{
       console.log(res.data)
     });
   }
-
 }
 </script>
 
@@ -81,34 +84,29 @@ export default{
 }
 .cards {
   background-color: rgb(255, 255, 255);
-
   width: 100%;
   height: 50vh;
   border-radius: 20px;
 }
-
 .botao {
   text-align: center;
   padding-bottom: 20px;
 }
-
 .entrar {
   background-color: rgba(113, 95, 205, 0.446);
   border: none;
   border-radius: 30px;
-  height: 50px;
-  width: 150px;
+  height: 40px;
+  width: 120px;
   color: white;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
-
 .entrar:hover {
   background-color: rgba(63, 45, 201, 0.551);
   transition: 1s;
 }
-
 @media screen and (min-width: 320px) and (max-width: 480px) {
   .container {
     padding-top: 20px;

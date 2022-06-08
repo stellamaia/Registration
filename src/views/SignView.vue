@@ -166,11 +166,33 @@
 </template>
 
 <script>
-
+import firebase from "firebase";
 
 export default {
   name: "SignView",
- 
+  data() {
+    return {
+      email: "",
+    password: "",
+      initials: "",
+    };
+  },
+  methods: {
+    signup() {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(
+          (user) => {
+          console.log(user)
+          //usar firestore para salvar dados do usuario cadastrado
+        },
+        (err) => {
+          alert(err)
+        }
+      )
+    },
+  },
 };
 </script>
 <style scoped>

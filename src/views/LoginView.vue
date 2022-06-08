@@ -7,6 +7,7 @@
 
           <b-form-input
             class="input-text"
+            required
             id="email"
             type="email"
              v-model="email"
@@ -15,13 +16,18 @@
         </div>
         <div class="lab-ip-2">
           <label class="labeltext" for="senha">Senha</label>
+          
           <b-form-input
             id="senha"
             class="input-text senha"
             type="password"
             v-model="password"
+        
             placeholder="Digite a sua senha"
-          ></b-form-input>
+          >
+       
+         </b-form-input>
+         
         </div>
 
         <div class="botao">
@@ -39,15 +45,40 @@
 </template>
 
 <script>
+import firebase from "firebase"
+
 
 
 export default {
   name: "LoginView",
+  data() {
+    return {
+      email: "",
+      password: "",
+      initials: "",
 
-  
+    };
+  },
+  methods: {
+    login() {
+      firebase
+      .auth()
+      .signInWithEmailAndPassword(this.email, this.password)
+      .then(
+         (user) =>{
+           alert(user);
+//  redirecionar o usuario para a pagina sign
+         },
+         (err) => {
+           alert(err);
+         }
+      )
+
+
+    },
+  },
 };
 </script>
-
 
 <style scoped>
 .login {

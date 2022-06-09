@@ -22,7 +22,7 @@
             class="input-text senha"
             type="password"
             v-model="password"
-        
+            
             placeholder="Digite a sua senha"
           >
        
@@ -65,12 +65,12 @@ export default {
       .auth()
       .signInWithEmailAndPassword(this.email, this.password)
       .then(
-         (user) =>{
-           alert(user);
+         () =>{
+        this.$router.push('/entrar');
 //  redirecionar o usuario para a pagina sign
          },
-         (err) => {
-           alert(err);
+         () => {
+            this.$swal("Oops...", "Algum erro aconteceu!", "error");
          }
       )
 

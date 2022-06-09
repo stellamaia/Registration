@@ -23,6 +23,7 @@
                     class="input-text"
                     id="nome"
                     type="text"
+                    v-model="name"
                     placeholder="Digite seu nome"
                   ></b-form-input>
                 </b-col>
@@ -44,6 +45,7 @@
                     class="input-text"
                     id="cpf"
                     type="text"
+                    v-model="cpf"
                     placeholder="Digite seu Cpf"
                   ></b-form-input>
                 </b-col>
@@ -53,6 +55,7 @@
                     class="input-text"
                     id="pis"
                     type="numbertext"
+                    v-model="pis"
                     placeholder="Pis"
                   ></b-form-input>
                 </b-col>
@@ -64,6 +67,7 @@
                     class="input-text"
                     id="cep"
                     type="text"
+                    v-model="cep"
                     placeholder="Digite seu Cep"
                   ></b-form-input>
                 </b-col>
@@ -73,6 +77,7 @@
                     class="input-text"
                     id="pais"
                     type="text"
+                    v-model="country"
                     placeholder="Digite seu País"
                   ></b-form-input>
                 </b-col>
@@ -84,6 +89,7 @@
                     class="input-text"
                     id="municipio"
                     type="text"
+                    v-model="county"
                     placeholder="Digite seu Município"
                   ></b-form-input>
                 </b-col>
@@ -93,6 +99,7 @@
                     class="input-text"
                     id="estado"
                     type="text"
+                       v-model="state"
                     placeholder="Digite seu Estado"
                   ></b-form-input>
                 </b-col>
@@ -104,6 +111,7 @@
                     class="input-text"
                     id="rua"
                     type="text"
+                       v-model="road"
                     placeholder="Digite sua Rua"
                   ></b-form-input>
                 </b-col>
@@ -113,6 +121,7 @@
                     class="input-text"
                     id="numero"
                     type="tel"
+                       v-model="number"
                     placeholder="Digite seu Número"
                   ></b-form-input>
                 </b-col>
@@ -126,6 +135,7 @@
                     class="input-text"
                     id="complemento"
                     type="text"
+                       v-model="complement"
                     placeholder="Digite o Complemento"
                   ></b-form-input>
                 </b-col>
@@ -152,7 +162,10 @@
                   <button @click="signup" class="input-text entrar">
                     Sign Up
                   </button>
-                     <p>Already have an account ? <router-link class="link-estilo" to="/">Login</router-link></p>
+                  <p>
+                    Already have an account ?
+                    <router-link class="link-estilo" to="/">Login</router-link>
+                  </p>
                 </div>
               </b-col>
             </b-row>
@@ -166,31 +179,58 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import { firebaseDb, firebaseAuth } from "../firebaseConfig";
 
 export default {
   name: "SignView",
   data() {
     return {
       email: "",
-    password: "",
+      password: "",
       initials: "",
     };
   },
   methods: {
     signup() {
-      firebase
-        .auth()
+      firebaseAuth
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(
-          (user) => {
-          console.log(user)
-          //usar firestore para salvar dados do usuario cadastrado
-        },
-        (err) => {
-          alert(err)
-        }
-      )
+          () => {
+            firebaseDb
+              .collection("users")
+              .add({
+                name: this.name,
+                email: this.email,
+                cpf: this.cpf,
+                pis: this.pis,
+                cep: this.cep,
+                country: this.country,
+                county: this.county,
+                state: this.state,
+                road: this.road,
+                number: this.number,
+                complement: this.complement,
+                password: this.password
+
+
+
+              })
+              .then(() => {
+                this.$swal(
+                  "Sucesso",
+                  "Senha atualizada com sucesso!",
+                  "success"
+                );
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          },
+          (err) => {
+            console.log(err);
+            this.$swal("Oops...", "Algum erro aconteceu!", "error");
+          }
+        );
     },
   },
 };

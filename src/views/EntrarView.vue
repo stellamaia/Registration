@@ -3,8 +3,9 @@
 <template>
   <div class="EntrarView">
     <div class="cad">
-      <p v-for="dado in dados"
-          :key="dado.id" class="card-title"> Olá {{ dado.nome }}!</p>
+      <p v-for="dado in dados" :key="dado.id" class="card-title">
+        Olá {{ dado.name }}!
+      </p>
     </div>
     <b-container class="container">
       <b-row>
@@ -21,13 +22,11 @@
                 <button class="entrar">Editar Dados</button>
               </b-col>
               <b-col class="botao" cols="12" sm="12" md="6" lg="4" xl="3">
-                
                 <button class="entrar">Sair</button>
               </b-col>
             </b-row>
           </div>
         </b-col>
-
       </b-row>
     </b-container>
   </div>
@@ -36,23 +35,35 @@
 
 
 <script>
-import axios from 'axios'
-const baseURL = "http://localhost:3000/dados";
+import { firebaseDb } from "../firebaseConfig";
+//const baseURL = "http://localhost:3000/dados";
 
 export default {
-  name:"EntrarView",
-  data(){
-    return{
-      dados:[],
+  name: "EntrarView",
+  data() {
+    return {
+      dados: [],
     };
   },
+  /*
   created(){
     axios.get(baseURL).then((res) =>{
       this.dados = res.data;
       console.log(res.data)
     });
   }
-}
+  */
+  created() {
+    firebaseDb
+      .collection("users")
+      .doc("LSF1Bxm5mleESFxgVaSt")
+      .get()
+      .then((res) => {
+        console.log(res.data());
+         this.dados = res.data;
+      });
+  },
+};
 </script>
 
 

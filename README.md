@@ -2,6 +2,8 @@
 
 Responsivo
 
+registration-coral.vercel.app
+
 !!! senha a partir de 6 caracteres para conseguir se cadastrar
 
 Desktop

@@ -10,33 +10,33 @@
             required
             id="email"
             type="email"
-             v-model="email"
+            v-model="email"
             placeholder="Digite seu E-mail"
           ></b-form-input>
         </div>
         <div class="lab-ip-2">
           <label class="labeltext" for="senha">Senha</label>
-          
+
           <b-form-input
             id="senha"
             class="input-text senha"
             type="password"
             v-model="password"
-            
             placeholder="Digite a sua senha"
           >
-       
-         </b-form-input>
-         
+          </b-form-input>
         </div>
 
         <div class="botao">
           <button @click="login" class="entrar">Login</button>
 
           <div class="link">
-            <p>Don't have an account already? <router-link class="link-estilo" to="/Sign">SignUp</router-link></p>
-       
-
+            <p>
+              Não tem uma conta ainda?
+              <router-link class="link-estilo" to="/Sign"
+                >Cadastre-se</router-link
+              >
+            </p>
           </div>
         </div>
       </b-card>
@@ -45,9 +45,7 @@
 </template>
 
 <script>
-import firebase from "firebase"
-
-
+import firebase from "firebase";
 
 export default {
   name: "LoginView",
@@ -56,25 +54,26 @@ export default {
       email: "",
       password: "",
       initials: "",
-
     };
   },
   methods: {
     login() {
       firebase
-      .auth()
-      .signInWithEmailAndPassword(this.email, this.password)
-      .then(
-         () =>{
-        this.$router.push('/entrar');
-//  redirecionar o usuario para a pagina sign
-         },
-         () => {
-            this.$swal("Oops...", "Algum erro aconteceu!", "error");
-         }
-      )
-
-
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(
+          (result) => {
+            localStorage.setItem("token", result.user.uid);
+            this.$router.push("/entrar");
+          },
+          () => {
+            this.$swal(
+              "Oops...",
+              "Você ainda não criou uma conta ou senha incorreta",
+              "error"
+            );
+          }
+        );
     },
   },
 };

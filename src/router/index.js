@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginView from '../views/LoginView';
 import EntrarView from '../views/EntrarView.vue'
+import EditarView from '../views/EditarView.vue'
 
 
 Vue.use(VueRouter)
@@ -25,8 +26,12 @@ const routes = [
     path: '/entrar',
     name: 'entrar',
     component: EntrarView
+  },
+  {
+    path: '/Editar',
+    name: 'Editar',
+    component: EditarView
   }
-
 
 ]
 

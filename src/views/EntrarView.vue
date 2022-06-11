@@ -1,38 +1,42 @@
-
-   
 <template>
-  <div class="EntrarView">
-    <div class="cad">
-      <p v-for="dado in dados" :key="dado.id" class="card-title">
-        Olá {{ dado.name }}!
-      </p>
-    </div>
-    <b-container class="container">
-      <b-row>
-        <b-col class="coluna-um" cols="12" sm="12" md="6" lg="5" xl="5">
-          <div>
-            <img class="img-sair" alt="Sair" src="../assets/sair.svg" />
-          </div>
-        </b-col>
+  <div>
+    <div v-if="token" class="EntrarView">
+      <div class="cad">
+        <p class="card-title">Olá, {{ dados.name }}!</p>
+      </div>
+      <b-container class="container">
+        <b-row>
+          <b-col class="coluna-um" cols="12" sm="12" md="6" lg="5" xl="5">
+            <div>
+              <img class="img-sair" alt="Sair" src="../assets/sair.svg" />
+            </div>
+          </b-col>
 
-        <b-col>
-          <div class="coluna-dois">
-            <b-row>
-              <b-col class="botao" cols="12" sm="12" md="6" lg="4" xl="3">
-                <button class="entrar">Editar Dados</button>
-              </b-col>
-              <b-col class="botao" cols="12" sm="12" md="6" lg="4" xl="3">
-                <button class="entrar">Sair</button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </b-container>
+          <b-col>
+            <div class="coluna-dois">
+              <b-row>
+                <b-col class="botao" cols="12" sm="12" md="6" lg="4" xl="3">
+                  <router-link to="/Editar">
+                    <button class="entrar">Editar Dados</button>
+                  </router-link>
+                </b-col>
+                <b-col class="botao" cols="12" sm="12" md="6" lg="4" xl="3">
+                  <button @click="logout()" class="entrar">Sair</button>
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
+    <div>
+      <h1 class="sem-acesso">Sem Acesso!</h1>
+      <router-link class="voltar-login" to="/">
+        <p>Voltar para página de <span class="login">Login</span></p>
+      </router-link>
+    </div>
   </div>
 </template>
-
-
 
 <script>
 import { firebaseDb } from "../firebaseConfig";
@@ -42,26 +46,25 @@ export default {
   name: "EntrarView",
   data() {
     return {
-      dados: [],
+      dados: null,
+      token: localStorage.getItem("token"),
     };
   },
-  /*
-  created(){
-    axios.get(baseURL).then((res) =>{
-      this.dados = res.data;
-      console.log(res.data)
-    });
-  }
-  */
+
   created() {
     firebaseDb
       .collection("users")
-      .doc("LSF1Bxm5mleESFxgVaSt")
+      .doc(this.token)
       .get()
       .then((res) => {
-        console.log(res.data());
-         this.dados = res.data;
+        this.dados = res.data();
       });
+  },
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push("/");
+    },
   },
 };
 </script>
@@ -73,6 +76,21 @@ export default {
 .EntrarView {
   background-color: rgba(113, 113, 222, 0.841);
   height: 100vh;
+}
+.sem-acesso {
+  text-align: center;
+  padding-top: 100px;
+  font-size: 60px;
+  color: rgb(205, 24, 24);
+}
+.voltar-login {
+  text-align: center;
+  font-size: 20px;
+  color: rgb(162, 161, 163);
+}
+.login {
+  font-weight: bold;
+  color: rgb(108, 108, 108);
 }
 .container {
   padding-top: 200px;

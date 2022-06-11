@@ -21,7 +21,7 @@
                   <label class="label__text" for="firstName"> Nome</label>
                   <b-form-input
                     class="input-text"
-                    id="nome"
+                    id="name"
                     type="text"
                     v-model="name"
                     placeholder="Digite seu nome"
@@ -99,7 +99,7 @@
                     class="input-text"
                     id="estado"
                     type="text"
-                       v-model="state"
+                    v-model="state"
                     placeholder="Digite seu Estado"
                   ></b-form-input>
                 </b-col>
@@ -111,7 +111,7 @@
                     class="input-text"
                     id="rua"
                     type="text"
-                       v-model="road"
+                    v-model="road"
                     placeholder="Digite sua Rua"
                   ></b-form-input>
                 </b-col>
@@ -121,7 +121,7 @@
                     class="input-text"
                     id="numero"
                     type="tel"
-                       v-model="number"
+                    v-model="number"
                     placeholder="Digite seu Número"
                   ></b-form-input>
                 </b-col>
@@ -135,7 +135,7 @@
                     class="input-text"
                     id="complemento"
                     type="text"
-                       v-model="complement"
+                    v-model="complement"
                     placeholder="Digite o Complemento"
                   ></b-form-input>
                 </b-col>
@@ -160,10 +160,10 @@
                       </router-link>
                       -->
                   <button @click="signup" class="input-text entrar">
-                    Sign Up
+                    Cadastre-se
                   </button>
                   <p>
-                    Already have an account ?
+                    Já possui uma conta?
                     <router-link class="link-estilo" to="/">Login</router-link>
                   </p>
                 </div>
@@ -188,6 +188,16 @@ export default {
       email: "",
       password: "",
       initials: "",
+      name: "",
+      cpf: "",
+      pis: "",
+      cep: "",
+      country: "",
+      county: "",
+      state: "",
+      road: "",
+      number: "",
+      complement: "",
     };
   },
   methods: {
@@ -195,10 +205,12 @@ export default {
       firebaseAuth
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(
-          () => {
+          (result) => {
             firebaseDb
               .collection("users")
-              .add({
+              .doc(result.user.uid)
+              .set({
+                id: result.user.uid,
                 name: this.name,
                 email: this.email,
                 cpf: this.cpf,
@@ -210,25 +222,22 @@ export default {
                 road: this.road,
                 number: this.number,
                 complement: this.complement,
-                password: this.password
-
-
-
               })
               .then(() => {
                 this.$swal(
                   "Sucesso",
-                  "Senha atualizada com sucesso!",
+                  "Conta criada com sucesso!",
                   "success"
-                );
+                ).then(() => this.$router.push("/"));
               })
+
               .catch((error) => {
                 console.log(error);
               });
           },
           (err) => {
             console.log(err);
-            this.$swal("Oops...", "Algum erro aconteceu!", "error");
+            this.$swal("Oops...", "Preencha todos os campos!", "error");
           }
         );
     },
@@ -247,6 +256,10 @@ export default {
   border: 0;
   padding: 0;
   margin: 0;
+}
+.link-estilo {
+  color: rgb(158, 152, 196);
+  font-weight: bold;
 }
 .principal {
   padding: 100px 150px 100px 150px;
@@ -361,8 +374,7 @@ export default {
     padding: 0;
   }
   .coluna-dois {
-    padding: 0px 20px 0 20px;
-    padding: 13px;
+    padding: 3px 20px 0 20px;
   }
   .img-principal {
     position: relative;
@@ -384,7 +396,7 @@ export default {
     background-color: rgba(113, 113, 222, 0.841);
   }
   .coluna-dois {
-    padding: 26px 90px 0 90px;
+    padding: 3px 90px 0 90px;
   }
 }
 </style>

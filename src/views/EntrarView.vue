@@ -29,7 +29,7 @@
         </b-row>
       </b-container>
     </div>
-    <div>
+    <div v-else>
       <h1 class="sem-acesso">Sem Acesso!</h1>
       <router-link class="voltar-login" to="/">
         <p>Voltar para página de <span class="login">Login</span></p>
